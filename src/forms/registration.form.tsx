@@ -1,7 +1,6 @@
-import { Form } from '@heroui/form';
-import { Button, Input } from '@heroui/react';
+import { Button, Input, Form  } from '@heroui/react';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface IProps {
     onClose: () => void;
