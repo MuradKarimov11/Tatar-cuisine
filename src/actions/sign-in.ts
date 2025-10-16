@@ -1,6 +1,6 @@
 import { signIn } from "@/auth/auth";
 
-export async function singInWithCredentials(email: string, password: string) {
+export async function signInWithCredentials(email: string, password: string) {
 
     try {
         const result = await signIn("credentials", {
