@@ -7,11 +7,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import RegistrationModal from "../modals/registration.modal";
 import LoginModal from "../modals/login.modal";
-import { use, useState } from "react";
+import {  useState } from "react";
 import { signOutFunc } from "@/actions/sign-out";
-import { useSession } from "next-auth/react";
-import { is } from "zod/locales";
-import { p } from "framer-motion/client";
+import { useAuthStore } from "@/store/auth-store";
 
 export const Logo = () => {
   return (
@@ -24,18 +22,20 @@ export default function Header() {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
+  const {isAuth, session, status, setAuthState} = useAuthStore();
+
   const pathname = usePathname();
-  const {data: session, status} = useSession();
-
-  const isAuth = status === "authenticated";
-
-  console.log("Session in header:", session);
-  console.log("Status in header:", status);
 
   const { navItems } = SITE_CONFIG;
 
   const handleSignOut = async () => {
-    await signOutFunc();
+    try {
+      await signOutFunc();
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    setAuthState(null, "unauthenticated");
   }
 
   const getNavItems = () => {
@@ -67,9 +67,10 @@ export default function Header() {
           {getNavItems()}
       </NavbarContent>
 
+      
       <NavbarContent justify="end">
         {isAuth && <p>Welcome, {session?.user?.email}!</p> }
-        {!isAuth ? (
+        {status === "loading" ? <p>Loading...</p> :  !isAuth ? (
           <>
             <NavbarItem>
               <Button 
@@ -96,20 +97,21 @@ export default function Header() {
             </NavbarItem>
 
           </> ) : (
-            <NavbarItem className="hidden lg:flex">
-              <Button 
-                as={Link} 
-                color="primary" 
-                href="#" 
-                variant="flat"
-                onPress={handleSignOut}
-              >
-                Login
-              </Button>
-            </NavbarItem>
-          )       
-        }
+          <NavbarItem className="hidden lg:flex">
+            <Button 
+              as={Link} 
+              color="primary" 
+              href="#" 
+              variant="flat"
+              onPress={handleSignOut}
+            >
+              Login
+            </Button>
+          </NavbarItem>
+        )       
+      }
       </NavbarContent>
+      
 
 
       <RegistrationModal 
@@ -124,3 +126,4 @@ export default function Header() {
     </Navbar>
   );
 }
+
