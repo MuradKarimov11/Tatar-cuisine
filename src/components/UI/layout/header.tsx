@@ -7,11 +7,15 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import RegistrationModal from "../modals/registration.modal";
 import LoginModal from "../modals/login.modal";
-import { useState } from "react";
+import { use, useState } from "react";
+import { signOutFunc } from "@/actions/sign-out";
+import { useSession } from "next-auth/react";
+import { is } from "zod/locales";
+import { p } from "framer-motion/client";
 
 export const Logo = () => {
   return (
-    <Image src="/logo" alt={SITE_CONFIG.title} width={26} height={26} priority/>
+    <Image src="/vercel.svg" alt={SITE_CONFIG.title} width={26} height={26} priority/>
   );
 };
 
@@ -21,7 +25,18 @@ export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const pathname = usePathname();
+  const {data: session, status} = useSession();
+
+  const isAuth = status === "authenticated";
+
+  console.log("Session in header:", session);
+  console.log("Status in header:", status);
+
   const { navItems } = SITE_CONFIG;
+
+  const handleSignOut = async () => {
+    await signOutFunc();
+  }
 
   const getNavItems = () => {
     return (navItems.map((item) => {
@@ -53,29 +68,47 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Button 
-            as={Link} 
-            color="primary" 
-            href="#" 
-            variant="flat"
-            onPress={() => setIsRegistrationOpen(true)}
-          >
-            Login
-          </Button>
-        </NavbarItem>
+        {isAuth && <p>Welcome, {session?.user?.email}!</p> }
+        {!isAuth ? (
+          <>
+            <NavbarItem>
+              <Button 
+                as={Link} 
+                color="secondary" 
+                href="#" 
+                variant="flat"
+                onPress={() => setIsLoginOpen(true)}
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
 
-        <NavbarItem>
-          <Button 
-            as={Link} 
-            color="primary" 
-            href="#" 
-            variant="flat"
-            onPress={() => setIsLoginOpen(true)}
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+            <NavbarItem>
+              <Button 
+                as={Link} 
+                color="primary" 
+                href="#" 
+                variant="flat"
+                onPress={() => setIsRegistrationOpen(true)}
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
+
+          </> ) : (
+            <NavbarItem className="hidden lg:flex">
+              <Button 
+                as={Link} 
+                color="primary" 
+                href="#" 
+                variant="flat"
+                onPress={handleSignOut}
+              >
+                Login
+              </Button>
+            </NavbarItem>
+          )       
+        }
       </NavbarContent>
 
 
