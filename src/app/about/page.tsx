@@ -1,9 +1,10 @@
+import PageContent from '@/components/common/page-content';
 import React from 'react';
 
 const AboutPage = () => {
   return (
     <div>
-      <h1>About</h1>
+      <PageContent/>
     </div>
   );
 }
