@@ -43,24 +43,27 @@ export default async function RootLayout({
         <Provider>
           <SessionProvider session={session}>
             <AppLoader>
-              <Header />
-              <Title/>
-              <main className={`flex flex-col max-w-[1024px] mx-auto px-[24px] justify-start items-center`} 
-                style={{
-                  height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`
-                }}>
-                {children}
-              </main>
-              <footer 
-                className={`w-full flex justify-center items-center py-3`}
-                style={{height: layoutConfig.footerHeight}}
-              >
-                <p>{SITE_CONFIG.description}</p>
-              </footer>
+              <div className="flex min-h-screen flex-col justify-between">
+                <div className="flex flex-col">
+                  <Header />
+                  <main
+                    className={`flex flex-col max-w-[1024px] mx-auto px-[24px] justify-start items-center`}
+                  >
+                    <Title />
+                    {children}
+                  </main>
+                </div>
+
+                <footer
+                  className={`w-full flex items-center justify-center py-3`}
+                  style={{ height: layoutConfig.footerHeight }}
+                >
+                  <p>{SITE_CONFIG.description}</p>
+                </footer>
+              </div>
             </AppLoader>
           </SessionProvider>
         </Provider>
-        
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-export const CATEGORTY_OPTIONS = [
+export const CATEGORY_OPTIONS = [
     { value: 'vegetables', label: 'овощи' },
     { value: 'fruits', label: 'фрукты' },
     { value: 'dairy', label: 'молочные продукты' },

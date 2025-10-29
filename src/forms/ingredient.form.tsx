@@ -1,6 +1,6 @@
 "use client";
 
-import { CATEGORTY_OPTIONS, UNIT_OPTIONS } from "@/constants/select-options";
+import { CATEGORY_OPTIONS, UNIT_OPTIONS } from "@/constants/select-options";
 import { useIngredientStore } from "@/store/ingredient.store";
 import { Button, Form, Input, Select, SelectItem } from "@heroui/react";
 import { useState, useTransition } from "react";
@@ -71,7 +71,7 @@ const IngredientForm = () => {
               setFormData({ ...formData, category: e.target.value })
             }
           >
-            {CATEGORTY_OPTIONS.map((option) => (
+            {CATEGORY_OPTIONS.map((option) => (
               <SelectItem key={option.value} className="text-black">
                 {option.label}
               </SelectItem>
