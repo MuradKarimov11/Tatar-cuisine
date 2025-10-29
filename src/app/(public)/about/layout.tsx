@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface IProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const AboutLayout: FC<IProps> = ({ children }) => {

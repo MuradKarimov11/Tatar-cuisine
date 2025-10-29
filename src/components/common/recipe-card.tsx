@@ -1,4 +1,3 @@
-
 "use client";
 
 import { IRecipe } from "@/types/recipe";

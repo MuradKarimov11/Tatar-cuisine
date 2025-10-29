@@ -1,12 +1,11 @@
-import PageContent from '@/components/common/page-content';
-import React from 'react';
+import PageContent from "@/components/common/page-content";
 
-const AboutPage = () => {
+const About = () => {
   return (
     <div>
-      <PageContent/>
+      <PageContent />
     </div>
   );
-}
+};
 
-export default AboutPage
+export default About;

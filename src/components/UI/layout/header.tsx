@@ -1,4 +1,3 @@
-
 "use client";
 
 import { layoutConfig } from "@/config/layout.config";

@@ -1,21 +1,18 @@
 export const CATEGORY_OPTIONS = [
-    { value: 'vegetables', label: 'овощи' },
-    { value: 'fruits', label: 'фрукты' },
-    { value: 'dairy', label: 'молочные продукты' },
-    { value: 'meat', label: 'мясо' },
-    { value: 'spices', label: 'специи' },
-    { value: 'other', label: 'другое' },    
+  { value: "VEGETABLES", label: "Овощи" },
+  { value: "FRUITS", label: "Фрукты" },
+  { value: "MEAT", label: "Мясо" },
+  { value: "DAIRY", label: "Молочные" },
+  { value: "SPICES", label: "Специи" },
+  { value: "OTHER", label: "Другое" }
 ] as const;
 
 export const UNIT_OPTIONS = [
-    { value: 'kg', label: 'килограмм' },
-    { value: 'g', label: 'грамм' },
-    { value: 'l', label: 'литр' },
-    { value: 'ml', label: 'миллилитр' },
-    { value: 'pcs', label: 'штука' },
-    { value: 'tbsp', label: 'столовая ложка' },
-    { value: 'tsp', label: 'чайная ложка' },
-    { value: 'cup', label: 'чашка' },
+  { value: "GRAMS", label: "Граммы" },
+  { value: "KILOGRAMS", label: "Килограммы" },
+  { value: "LITERS", label: "Литры" },
+  { value: "MILLILITERS", label: "Миллилитры" },
+  { value: "PIECES", label: "Штуки" }
 ] as const;
 
 export const UNIT_ABBREVIATIONS = [
@@ -25,7 +22,3 @@ export const UNIT_ABBREVIATIONS = [
   { value: "MILLILITERS", label: "мл" },
   { value: "PIECES", label: "шт" }
 ] as const;
-
-
-
-    

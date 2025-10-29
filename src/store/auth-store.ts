@@ -2,6 +2,7 @@ import { Session } from "next-auth";
 import { create } from "zustand";
 
 type SessionStatus = "authenticated" | "unauthenticated" | "loading";
+
 interface AuthState {
   isAuth: boolean;
   status: SessionStatus;
